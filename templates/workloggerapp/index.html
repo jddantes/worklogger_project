@@ -2,6 +2,26 @@
 <html>
 	<head>
 		<title>Worklogger</title>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			body{
+				text-align: center;
+				padding: 0 15%;
+				font-family: 'Lato', sans-serif;
+				font-weight: 300;
+			}
+			li{
+				list-style-type: none; 
+			}
+			a{
+				text-decoration: none;
+				color: inherit;
+			}
+			.nav{
+				text-align: right;
+				text-transform: uppercase;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -15,6 +35,13 @@
 
 		{% if user.is_authenticated%}
 		<h3> Hello there, {{user.username}}!</h3>
+
+		<div class="make_log">
+
+		</div>
+		<div class="logs">
+			
+		</div>
 			
 		{% else %}
 		<h3> Hello there! </h3>

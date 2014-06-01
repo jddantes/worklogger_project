@@ -2,7 +2,7 @@ import os
 
 def populate():
 	user = add_user(username='user', password='password')
-	
+
 	project1 = add_project(name='Project 1')
 	project2 = add_project(name='Save the Earth')
 	project3 = add_project(name='Cool project')
@@ -54,6 +54,7 @@ def printlog(log):
 	print("Remarks: "+log.remarks)
 	print("User: "+log.user.username)
 	print("Date: "+log.date.strftime("%m %d %Y"))
+	print("Date logged: "+log.date_logged.strftime("%m %d %Y"))
 	print("")
 
 # Start execution here!

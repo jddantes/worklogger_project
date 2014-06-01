@@ -23,6 +23,7 @@ class Log(models.Model):
 	remarks = models.CharField(max_length=128)
 	user = models.ForeignKey(User)
 	date = models.DateField( default=datetime.date.today)
+	date_logged = models.DateField( auto_now_add=True)
 
 	def __str__(self):
 		#return u'%s - %s - %s' % (self.project, self.date|date:"M d Y",self.remarks)
