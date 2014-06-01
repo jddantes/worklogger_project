@@ -17,7 +17,7 @@ class Project(models.Model):
 class Log(models.Model):
 	project = models.ForeignKey(Project, null=True, on_delete=models.SET_NULL)
 	duration = models.DecimalField(max_digits=4, decimal_places=2)
-	remarks = models.CharField(max_length=128)
+	remarks = models.CharField(max_length=128, default='')
 	user = models.ForeignKey(User)
 	date = models.DateField( default=datetime.date.today)
 	date_logged = models.DateField( auto_now_add=True)

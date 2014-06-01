@@ -2,6 +2,7 @@ import os
 
 def populate():
 	user = add_user(username='user', password='password')
+	user2 = add_user(username='user2', password='password2')
 
 	project1 = add_project(name='Project 1')
 	project2 = add_project(name='Save the Earth')
@@ -14,6 +15,10 @@ def populate():
 
 	add_log(user=user, duration=1, remarks="I'm cool", project=project3)
 	add_log(user=user, duration=2, remarks="I'm still cool", project=project3)
+
+	add_log(user=user2, duration=5, remarks="NOPE I'M COOLER", project=project3)
+	add_log(user=user2, duration=6, remarks="SAVE THE EARTH", project=project2)
+	add_log(user=user2, duration=3, remarks="YOU'RE WELCOME MOTHER EARTH", project=project2)
 
 	# Print users
 	print("Users:")

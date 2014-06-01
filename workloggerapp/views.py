@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from workloggerapp.models import Log, Project
+from workloggerapp.forms import LogForm
 from django.db.models import Sum
 import datetime
 from time import *
@@ -17,6 +18,12 @@ def index(request):
 	context = RequestContext(request)
 	context_dict = {}
 	user = request.user
+
+	print("User "+user.username+" with id "+str(user.id))
+
+	context_dict['hard_user_id'] = user.id
+
+	log_date = datetime.date.today() # Change later
 
 	log_list = Log.objects.filter(user__username=user.username)
 	context_dict['log_list'] = log_list
@@ -33,6 +40,18 @@ def index(request):
 
 	logs_thismonth = Log.objects.filter(user__username=user.username, date__month=today.month).aggregate(Sum('duration'))['duration__sum']
 	context_dict['logs_thismonth'] = logs_thismonth
+
+	if request.method == 'POST':
+		form = LogForm(data=request.POST,)
+
+		if form.is_valid():
+			form.save(commit=True)
+		else:
+			print(form.errors)
+	else:
+		form = LogForm()
+
+	context_dict['form']=form
 
 	return render_to_response('workloggerapp/index.html', context_dict, context)
 

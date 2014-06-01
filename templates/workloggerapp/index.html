@@ -19,7 +19,7 @@
 			}
 
 			th,td{
-				width: 33%;
+				width: 25%;
 			}
 
 			.nav{
@@ -43,7 +43,12 @@
 				width: 100%;
 				margin-top: 40px;
 			}
+
+			#id_user{
+				display:none;
+			}
 		</style>
+		
 	</head>
 
 	<body>
@@ -62,16 +67,28 @@
 			<h3>Log your time below:</h3>
 			<form action="/workloggerapp/" method="post" id="log_form">
 				{% csrf_token %}
+				{% for hidden in form.hidden_fields %}
+				{{ hidden }}
+				{% endfor %}
 				<table>
 					<tr>
 						<th>DURATION</th>
 						<th>PROJECT</th>
 						<th>REMARKS</th>
+						<th>YYYY-MM-DD</th>
 					</tr>
 					<tr>
+						<!-- <td><input type="text"></td>
 						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
+						<td><input type="text"></td> -->
+						{% for field in form.visible_fields %}
+						<td>
+							{{ field.errors }}
+							{{ field.help_text }}
+							{{field}}
+							
+						</td>
+						{% endfor %}
 					</tr>
 					<tr>
 						<td></td>
@@ -110,5 +127,11 @@
 		{% else %}
 		<h3> Hello there! </h3>
 		{% endif %}
+		<script type="text/javascript">
+			var my_select = document.getElementById("id_user");
+			for(var i=0; i<my_select.length; i++){
+				my_select.options[i].value = {{ hard_user_id}};
+			}
+		</script>
 	</body>
 </html>
