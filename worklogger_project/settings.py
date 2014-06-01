@@ -92,4 +92,4 @@ TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
 
-LOGIN_URL = '/workloggerapp/login'
+LOGIN_URL = '/workloggerapp/login/'
