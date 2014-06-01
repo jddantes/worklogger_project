@@ -17,9 +17,22 @@
 				text-decoration: none;
 				color: inherit;
 			}
+
+			th,td{
+				width: 33%;
+			}
+
 			.nav{
 				text-align: right;
 				text-transform: uppercase;
+			}
+
+			.make_log h3{
+				text-align: left;
+			}
+			.make_log table{
+				width: 100%;
+				margin-top: 40px;
 			}
 
 			.logs table{
@@ -42,7 +55,27 @@
 		<h3> Hello there, {{user.username}}!</h3>
 
 		<div class="make_log">
-
+			<h3>Log your time below:</h3>
+			<form action="/workloggerapp/" method="post" id="log_form">
+				{% csrf_token %}
+				<table>
+					<tr>
+						<th>DURATION</th>
+						<th>PROJECT</th>
+						<th>REMARKS</th>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><input type="submit" value="Submit Log" name="submit"></td>
+					</tr>
+				</table>
+			</form>
 		</div>
 		<div class="logs">
 			<table>
