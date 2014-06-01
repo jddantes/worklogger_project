@@ -21,7 +21,7 @@ def index(request):
 	log_list = Log.objects.filter(user__username=user.username)
 	context_dict['log_list'] = log_list
 
-	logs_today = Log.objects.filter(user__username=user.username).aggregate(Sum('duration'))['duration__sum']
+	logs_today = Log.objects.filter(user__username=user.username, date=datetime.date.today()).aggregate(Sum('duration'))['duration__sum']
 	context_dict['logs_today'] = logs_today
 
 	return render_to_response('workloggerapp/index.html', context_dict, context)
