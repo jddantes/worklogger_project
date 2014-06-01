@@ -113,7 +113,11 @@
 
 				{% if log_list %}
 					{% for log in log_list %}
+						{% if log.date < log.date_logged %}
+						<tr style="color:red;">
+						{% else %}
 						<tr>
+						{% endif %}
 							<td>{{log.duration}}</td>
 							<td>{{log.project}}</td>
 							<td>{{log.remarks}}</td>

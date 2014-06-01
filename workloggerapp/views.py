@@ -25,7 +25,7 @@ def index(request):
 
 	log_date = datetime.date.today() # Change later
 
-	log_list = Log.objects.filter(user__username=user.username)
+	log_list = Log.objects.filter(user__username=user.username, date=log_date)
 	context_dict['log_list'] = log_list
 
 	today = datetime.date.today()
