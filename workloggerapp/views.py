@@ -21,8 +21,18 @@ def index(request):
 	log_list = Log.objects.filter(user__username=user.username)
 	context_dict['log_list'] = log_list
 
-	logs_today = Log.objects.filter(user__username=user.username, date=datetime.date.today()).aggregate(Sum('duration'))['duration__sum']
+	today = datetime.date.today()
+	start_week = today - datetime.timedelta(today.weekday())
+	end_week = start_week + datetime.timedelta(7)
+
+	logs_today = Log.objects.filter(user__username=user.username, date=today).aggregate(Sum('duration'))['duration__sum']
 	context_dict['logs_today'] = logs_today
+
+	logs_thisweek = Log.objects.filter(user__username=user.username, date__range=[start_week, end_week]).aggregate(Sum('duration'))['duration__sum']
+	context_dict['logs_thisweek'] = logs_thisweek
+
+	logs_thismonth = Log.objects.filter(user__username=user.username, date__month=today.month).aggregate(Sum('duration'))['duration__sum']
+	context_dict['logs_thismonth'] = logs_thismonth
 
 	return render_to_response('workloggerapp/index.html', context_dict, context)
 
