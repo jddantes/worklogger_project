@@ -24,9 +24,6 @@ class LogForm(forms.ModelForm):
 	# Get user.id in views.index and pass it as {{hard_user_id}}
 	# Use {{hard_user_id}} to modify the select option values in index.html and hide the select itself with css
 
-
-
-
 	class Meta:
 		model = Log
 		fields = ( 'duration', 'project', 'remarks', 'date', 'date_logged', 'user')

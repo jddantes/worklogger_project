@@ -86,7 +86,6 @@
 							{{ field.errors }}
 							{{ field.help_text }}
 							{{field}}
-							
 						</td>
 						{% endfor %}
 					</tr>
@@ -104,7 +103,8 @@
 			<h3>Total logs for the month: {{logs_thismonth}} hours</h3>
 		</div>
 		<div class="logs">
-			<table>
+			<input onkeyup="filterByDate()" id="date_input" type="text" placeholder="YYYY-MM-DD" value="{{date_today|date:'Y-m-d'}}" />
+			<table id="logs_table">
 				<tr>
 					<th>DURATION</th>
 					<th>PROJECT</th>
@@ -121,6 +121,7 @@
 							<td>{{log.duration}}</td>
 							<td>{{log.project}}</td>
 							<td>{{log.remarks}}</td>
+							<input type="hidden" value="{{log.date|date:'Y-m-d'}}" />
 						</tr>
 					{% endfor %}
 				{% endif %}
@@ -136,6 +137,28 @@
 			for(var i=0; i<my_select.length; i++){
 				my_select.options[i].value = {{ hard_user_id}};
 			}
+
+			// Filter data to date
+			filterByDate();
+
+			function filterByDate(){
+				console.log("Filtering");
+				var date = document.getElementById("date_input").value;
+
+				// Iterate through logs
+				var table = document.getElementById("logs_table");
+				for (var i=1, row; row=table.rows[i]; i++){
+					var input_value = row.children[3].value;
+
+					if(date==input_value){
+						row.style.display="table-row";
+					} else {
+						row.style.display="none";
+					}
+				}
+
+			}
+
 		</script>
 	</body>
 </html>
