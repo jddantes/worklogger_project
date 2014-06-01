@@ -6,13 +6,21 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from workloggerapp.models import Log, Project
+
 # Create your views here.
 
 @login_required
 def index(request):
 	context = RequestContext(request)
+	context_dict = {}
+	user = request.user
+	log_list = Log.objects.filter(user__username=user.username)
+	print("Log_list: ")
+	print(log_list)
+	context_dict['log_list'] = log_list
 
-	return render_to_response('workloggerapp/index.html', {}, context)
+	return render_to_response('workloggerapp/index.html', context_dict, context)
 
 def user_login(request):
 	context = RequestContext(request)

@@ -21,6 +21,11 @@
 				text-align: right;
 				text-transform: uppercase;
 			}
+
+			.logs table{
+				width: 100%;
+				margin-top: 40px;
+			}
 		</style>
 	</head>
 
@@ -40,7 +45,24 @@
 
 		</div>
 		<div class="logs">
-			
+			<table>
+				<tr>
+					<th>DURATION</th>
+					<th>PROJECT</th>
+					<th>REMARKS</th>
+				</tr>
+
+				{% if log_list %}
+					{% for log in log_list %}
+						<tr>
+							<td>{{log.duration}}</td>
+							<td>{{log.project}}</td>
+							<td>{{log.remarks}}</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+
+			</table>
 		</div>
 			
 		{% else %}
