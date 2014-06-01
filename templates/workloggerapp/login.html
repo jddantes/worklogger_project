@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Worklogger - Login</title>
+		<style type="text/css">
+			body{
+				text-align: center;
+				padding-top: 240px;
+			}
+			form{
+				margin: 0 auto;
+				display: inline-block;
+				text-align: center;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Login to Worklogger!</h1>
+		<form action="/workloggerapp/login/" method="post" id="login_form">
+			{% csrf_token %}
+			<input type="text" name="username" value="" placeholder="Username" size="20">
+			<br/>
+			<input type="password" name="password" value="" placeholder="Password" size="20">
+			<br/>
+
+			<input type="submit" value="Login">
+		</form>
+	</body>
+</html>

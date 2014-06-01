@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Worklogger</title>
+	</head>
+
+	<body>
+		<div class="nav">
+			<ul>
+				<li><a href="/workloggerapp/logout">Logout</a></li>
+			</ul>
+		</div>
+
+		<h1> Worklogger </h1>
+
+		{% if user.is_authenticated%}
+		<h3> Hello there, {{user.username}}!</h3>
+			
+		{% else %}
+		<h3> Hello there! </h3>
+		{% endif %}
+	</body>
+</html>
