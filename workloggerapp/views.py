@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from workloggerapp.models import Log, Project
 from django.db.models import Sum
+import datetime
+from time import *
 
 # Create your views here.
 
@@ -15,10 +17,12 @@ def index(request):
 	context = RequestContext(request)
 	context_dict = {}
 	user = request.user
+
 	log_list = Log.objects.filter(user__username=user.username)
-	print("Log_list: ")
-	print(log_list)
 	context_dict['log_list'] = log_list
+
+	logs_today = Log.objects.filter(user__username=user.username).aggregate(Sum('duration'))['duration__sum']
+	context_dict['logs_today'] = logs_today
 
 	return render_to_response('workloggerapp/index.html', context_dict, context)
 
