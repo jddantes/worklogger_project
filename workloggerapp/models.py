@@ -2,17 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 from time import *
+from django.db.models import Sum
 # Create your models here.
 
 class Project(models.Model):
 	name = models.CharField(max_length=128)
 
 	def total_hours(self):
-		cnt = 0
-		for log in Log.objects.filter(project=self):
-			print('log duration: '+str(log.duration))
-			cnt += log.duration
-		return cnt
+		return Log.objects.filter(project=self).aggregate(Sum('duration'))['duration__sum']
 
 	def __str__(self):
 		return self.name
